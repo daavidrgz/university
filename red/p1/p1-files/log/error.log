@@ -1,0 +1,26 @@
+----------
+Request: null
+Address: /127.0.0.1:41222
+Date: 27/04/2021 09:46:22 GMT+01:00
+Response: HTTP/1.0 400 Bad Request
+--------------------
+Request: null
+Address: /127.0.0.1:41250
+Date: 27/04/2021 09:46:28 GMT+01:00
+Response: HTTP/1.0 400 Bad Request
+--------------------
+Request: null
+Address: /127.0.0.1:41296
+Date: 27/04/2021 09:46:48 GMT+01:00
+Response: HTTP/1.0 400 Bad Request
+--------------------
+Request: null
+Address: /127.0.0.1:41346
+Date: 27/04/2021 09:46:56 GMT+01:00
+Response: HTTP/1.0 400 Bad Request
+--------------------
+Request: null
+Address: /127.0.0.1:41372
+Date: 27/04/2021 09:47:03 GMT+01:00
+Response: HTTP/1.0 400 Bad Request
+----------

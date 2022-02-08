@@ -1,0 +1,73 @@
+----------
+Request: GET / HTTP/1.1
+Address: /127.0.0.1:41216
+Date: 27/04/2021 09:46:06 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 775
+--------------------
+Request: GET / HTTP/1.1
+Address: /127.0.0.1:41224
+Date: 27/04/2021 09:46:16 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 775
+--------------------
+Request: GET /favicon.ico HTTP/1.1
+Address: /127.0.0.1:41226
+Date: 27/04/2021 09:46:16 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 894
+--------------------
+Request: GET /subfolder-without-index HTTP/1.1
+Address: /127.0.0.1:41248
+Date: 27/04/2021 09:46:20 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 301
+--------------------
+Request: GET / HTTP/1.1
+Address: /127.0.0.1:41298
+Date: 27/04/2021 09:46:43 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 775
+--------------------
+Request: GET /yourForm.html HTTP/1.1
+Address: /127.0.0.1:41300
+Date: 27/04/2021 09:46:45 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 11965
+--------------------
+Request: GET /styles.css HTTP/1.1
+Address: /127.0.0.1:41302
+Date: 27/04/2021 09:46:45 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 3896394
+--------------------
+Request: GET /background.png HTTP/1.1
+Address: /127.0.0.1:41308
+Date: 27/04/2021 09:46:45 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 901596
+--------------------
+Request: GET /subfolder-without-index HTTP/1.1
+Address: /127.0.0.1:41348
+Date: 27/04/2021 09:46:51 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 301
+--------------------
+Request: GET /subfolder-without-index HTTP/1.1
+Address: /127.0.0.1:41350
+Date: 27/04/2021 09:46:54 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 301
+--------------------
+Request: GET /subfolder-without-index HTTP/1.1
+Address: /127.0.0.1:41376
+Date: 27/04/2021 09:46:58 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 301
+--------------------
+Request: GET /LICENSE.txt HTTP/1.1
+Address: /127.0.0.1:41378
+Date: 27/04/2021 09:47:01 GMT+01:00
+Response: HTTP/1.0 200 OK
+Content-Length: 579
+----------
