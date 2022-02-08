@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="10.10.5.120">
+    <serverData>
+      <paths name="10.10.5.120">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Escritorio/FIC_BOX/Pro_2" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

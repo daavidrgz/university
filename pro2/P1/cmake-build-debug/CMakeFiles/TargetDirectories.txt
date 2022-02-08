@@ -1,0 +1,4 @@
+/cygdrive/c/Users/David/Downloads/P1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/David/Downloads/P1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cygdrive/c/Users/David/Downloads/P1/cmake-build-debug/CMakeFiles/main.dir
+/cygdrive/c/Users/David/Downloads/P1/cmake-build-debug/CMakeFiles/test_lists.dir

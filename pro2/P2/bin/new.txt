@@ -1,0 +1,7 @@
+90 C Cangas 78
+91 C Madrid 89
+88 N Madrid Toledo
+88 N Cangas Vigo
+78 V Cangas Vigo
+90 S
+89 R

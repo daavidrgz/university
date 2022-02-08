@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Covid Radar for covid-related tracing</title>
+	<link rel="stylesheet" href="../global.css">
+	<link rel="stylesheet" href="register.css">
+</head>
+<body>
+	<div id="cover" class="show-cover" role="presentation">
+		<div>
+			<span>
+				Covid Radar
+				<span class="underline"></span>
+			</span>
+			<i class="fi fi-rr-chart-network"></i>
+		</div>
+	</div>
+
+	<main>
+		<div id="info-box" class="hidden" aria-hidden="true">
+			<i class="fi fi-rr-cross-circle"></i>
+			<span></span>
+		</div>
+		 
+		<button class="home-btn" id="home" role="link">
+			<span>Home</span>
+			<i class="fi fi-rr-home"></i>
+		</button>
+
+		<div class="register-container">
+
+			<h1 class="title">Register</h1>
+		
+			<form id="register-form" class="input-form">
+				<input class="input-field" id="username" autocomplete="off" type="text" inputmode="verbatim" autofocus required
+					placeholder="Username" pattern="[a-z0-9]{4,16}"
+					title="Username's length must be between 4 and 16 and must only contains lowercase 
+					letters and numbers."
+				>
+				<input class="input-field" id="password" autocomplete="off" type="password" inputmode="verbatim" required 
+					placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+					title="Password's length must be greater than 8 and must only contains a letter and a number"
+				>
+				<input class="input-field" id="name" autocomplete="given-name" type="text" inputmode="latin" required 
+					placeholder="Name" pattern="[a-zA-z]+"
+					title="Name must only contains letters"
+				>
+				<input class="input-field" id="surname" autocomplete="additional-name" type="text" inputmode="latin" required
+					placeholder="Surname" pattern="[a-zA-z]+"
+					title="Surname must only contains letters"
+				>
+				<input class="input-field" id="email" autocomplete="email" type="email" required
+					placeholder="Email"
+				>
+				<input class="input-field" id="phone" autocomplete="tel" type="tel" required
+					placeholder="Phone" pattern="[0-9]+"
+					title="Phone must only contains numbers"
+				>
+				<div class="checkbox-container">
+					<span class="checkbox-text">Vaccinated</span>
+					<label class="checkbox" role="checkbox">
+						<input id="is_vaccinated" type=checkbox checked>
+						<span class="checkmark"></span>
+					</label>
+				</div>
+				<button class="submit-btn" id="register" type="submit">Submit</button>
+			</form>
+		</div>
+	</main>
+
+	<script type="module" src="register.js"></script>
+</body>
+</html>

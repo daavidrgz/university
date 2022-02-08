@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Covid Radar for covid-related tracing</title>
+	<link rel="stylesheet" href="../global.css">
+	<link rel="stylesheet" href="login.css">
+</head>
+<body>
+	<div id="cover" class="show-cover" role="presentation">
+		<div>
+			<span>
+				Covid Radar
+				<span class="underline"></span>
+			</span>
+			
+			<i class="fi fi-rr-chart-network"></i>
+		</div>
+	</div>
+
+	<main>
+		<div id="info-box" class="hidden" aria-hidden="true" role="link">
+			<i class="fi fi-rr-cross-circle"></i>
+			<span></span>
+		</div>
+
+		<button class="home-btn" id="home">
+			<span>Home</span>
+			<i class="fi fi-rr-home"></i>
+		</button>
+
+		<div class="login-container">
+
+			<h1 class="title">Login</h1>
+
+			<form id="login-form">
+					<input class="input-field" autocomplete="off" id="username" type="text" autofocus required
+					placeholder="Username" pattern="[a-z0-9]{4,16}"
+					title="Username's length must be between 4 and 16">
+					<input class="input-field" autocomplete="off" id="password" type="password" required 
+					placeholder="Password">
+					<button class="submit-btn" id="login" type="submit">Submit</button>
+			</form>	
+		</div>
+	</main>
+	<script type="module" src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+David Rodríguez Bacelar (david.rbacelar@udc.es)
+Anxo Portela Iglesias (anxo.portela.iglesias@udc.es) 
+Sergio Rodríguez Seoane: sergio.rodriguez.seoane@udc.es
+
+=============================================
+
+## INTRODUCCIÓN:
+
+## El principal objetivo de este análisis empírico será el de hallar la complejidad que tiene la inserción de números aleatorios a partir de un árbol binario de 
+búsqueda vacío y la posterior búsqueda en dicho árbol, midiendo sus tiempos de ejecución (en microsegundos) para distinto número de entradas.
+
+## Para realizar las pruebas se utilizó un Lenovo-Legion Y540 con las siguientes especificaciones:
+	- Procesador Intel® Core™ i5-9300H @ 2.40GHz × 8.
+	- Memoria RAM DDR4 de 16 GB (2x8 GB) a 2666 MHz.
+	- Sistema Operativo GNU/LINUX Ubuntu v20.04.1 LTS 64bit / Kernel: 5.4.0-52-generic.
+
+
+## En primer lugar y para comprobar el correcto funcionamiento de la implementación de la estructura de datos, se utilizó una función test que realizaba distintas 
+operaciones sobre los árboles.
+
+
+========== TEST ==========
+
+Creando árbol
+- Altura del árbol: -1
+Insertando elemento 7
+Insertando elemento 2
+Insertando elemento -1
+Insertando elemento 1
+Insertando elemento 5
+(( -1 ( 1 )) 2 ( 5 )) 7 
+- Altura del árbol: 3
+Borrando árbol
+( )
+Insertando elemento 3
+Insertando elemento 4
+Insertando elemento 0
+Insertando elemento 0
+( 0 ) 3 ( 4 )
+Buscando el elemento 3:
+- Elemento 3 encontrado con 1 repeticiones
+Buscando el elemento 0:
+- Elemento 0 encontrado con 2 repeticiones
+Buscando el elemento 5:
+- Elemento 5 no encontrado
+
+========== FIN TETS ==========
+
+
+
+## RESULTADOS:
+
+AVISO: Recalcar que para obtener una tabla con valores más estables, se repitió cada prueba varias veces, escogiendo finalmente 
+aquella con una variabilidad menor en los tiempos.
+
+## Para el caso del algoritmo de inserción:
+
+            - La cota subestimada f(n) = n^1.1
+            - La cota ajustada g(n) = n^1.35
+            - La cota sobreestimada h(n) = n^1.5
+            
+            
+INSERCIÓN:
+
+        n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+     8000      1154.0000       0.058723      0.0062092     0.00161276
+    16000      2713.0000       0.064405      0.0057265     0.00134051
+    32000      6716.0000       0.074378      0.0055611     0.00117324
+    64000     17943.0000       0.092704      0.0058284     0.00110822
+   128000     46544.0000       0.112184      0.0059310     0.00101636
+   256000    109274.0000       0.122872      0.0054625     0.00084364
+   512000    296396.0000       0.155480      0.0058124     0.00080904
+  1024000    837333.0000       0.204912      0.0064416     0.00080807
+
+
+Notas:
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.0058, 0.0062).
+  
+CONCLUSIÓN: T(n) = O(n^1.35)
+
+
+---------------------------------
+
+
+
+## Para el caso del algoritmo de búsqueda:
+
+            - La cota subestimada f(n) = n^1.1
+            - La cota ajustada g(n) = n^1.35
+            - La cota sobreestimada h(n) = n^1.5
+            
+            
+BÚSQUEDA:
+
+        n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+     8000      1334.0000       0.067882      0.0071777     0.00186432
+    16000      3371.0000       0.080025      0.0071154     0.00166563
+    32000      8588.0000       0.095110      0.0071111     0.00150026
+    64000     23475.0000       0.121285      0.0076254     0.00144989
+   128000     54250.0000       0.130758      0.0069130     0.00118464
+   256000    155333.0000       0.174663      0.0077650     0.00119923
+   512000    360624.0000       0.189172      0.0070720     0.00098435
+  1024000    940506.0000       0.230161      0.0072353     0.00090764
+
+
+Notas:
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.0070, 0.0072).
+    
+CONCLUSIÓN: T(n) = O(n^1.35)
+
+
+=======================================
+=======================================
+
+
+##CONCLUSIONES FINALES:
+
+Tras analizar los resultados, vemos como el algoritmo de inserción es algo más rápido (17%) en todos los casos que el de búsqueda.
+Además, podemos comprobar como la complejidad empírica obtenida para ambos casos (n^1.35) se corresponde de manera bastante aproximada con la complejidad teórica n*log2(n).
+
+En definitiva, estas dos funciones y en general los ABB son estructuras de datos dinámicas que mejoran la búsqueda y la inserción con respecto, por ejemplo, a una 
+lista enlazada tradicional, sin perder sencillez y claridad en la implementación del código gracias a la recursividad.

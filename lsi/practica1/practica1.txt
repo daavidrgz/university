@@ -1,0 +1,171 @@
+a)
+	/etc/network/interfaces -> Device interfaces
+	/etc/hosts -> Local hosts
+	/etc/resolv.conf -> DNS Servers
+	/etc/nsswitch.conf -> File which provides data to the GNU C Library
+	/etc/apt/sources.list -> Sets the repositories to use
+
+b) 
+	Current distro version -> 
+		- /usr/lib/os-release
+		- lsb_release -a
+		- /etc/debian_version
+		- hostnamectl
+	Update distro ->
+		sudo sed -i 's/buster/bullseye/g' /etc/apt/sources.list # Change the distro repositories to Debain 11
+		apt update
+		apt upgrade --without-new-pkgs
+		apt full-upgrade
+
+c) 
+	Boot Logs ->
+		/var/log/boot.log
+		journalctl -b -1
+		journalctl -b -p 3 (see errors)
+
+	Get default target -> 
+		systemctl get-default
+
+	Get all targets ->
+		systemctl list-units --type target --all
+
+	Get all service ->
+		systemctl list-units --type service --all
+
+	Change default target ->
+		systemctl set-default multi-user.target
+
+
+d)
+	Start time ->
+		systemd-analyze
+	Services orderd by boot time ->
+		systemd-analyze blame
+		
+e)
+	See if any service has failed -> 
+		systemctl list-units --state=failed
+	
+	To see a brief description of a service ->
+		systemctl cat systemd-timesyncd.service
+
+f)
+	iface ens34:0 inet static
+		address 192.168.1.100
+		netmask 255.255.255.0
+
+g)
+	Routes defined in the system -> 
+		ip route
+	Add a static route ->
+		ip route add 10.11.48.154/32 via 10.11.48.1 dev ens33
+
+h)
+	Services disabled (masked) with systemctl mask:
+		- wpa_supplicant.service: We don't use the WiFi.
+		- ModemManager.service: We don't also use 2G, 3G or 4G.
+		- avahi-daemon.service: Zero-conf netowork discovery. Why.
+		- udisks2.service: Service to automount USBs. We don't need it'.
+		- apparmor.service: Service to "protect" the apps. We don't need protection, we need speed.
+		- NetworkManager.service: Automatic network manager, we use manual configuration.
+	
+	User services disabled with systemctl --user mask:
+		- pipewire.service: Service to capture sound
+		- pulseaudio.service
+		- org.bluez.service
+		- tracker-miner-xxxx-.service
+
+i)
+	Create our own service ->
+		touch /etc/systemd/system/my-service.service
+		chmod +x /etc/systemd/system/my-service.service
+		cat my-service.service
+			[Unit]
+			Description=My Little Script
+
+			[Service]
+			User=root
+			WorkingDirectory=/root
+			ExecStart=/root/my-script.sh
+
+			[Install]
+			WantedBy=multi-user.target
+
+j)
+	See current open connections ->
+		ss -natu
+
+k)
+	System process monitor ->
+		top (Press C to sort by CPU demand or press M to show RAM related info)
+
+	System connections monitor ->
+		tcptrack (install)
+		iftop
+		watch -n 1 ss -natu # The watch command executes the command every -n *seconds*
+
+l)
+	Check if a daemon supports TCP Wrappers ->
+		ldd $(which daemon) | grep libwrap.so
+
+	[hosts.allow]
+	sshd: 10.20.0.0/255.255.0.0
+	sshd: 10.30.0.0/255.255.0.0
+	sshd: 10.31.0.0/255.255.0.0
+	sshd: 10.32.0.0/255.255.0.0
+	sshd: 10.11.51.145/255.255.255.255
+
+	[hosts.deny]
+	ALL: ALL
+
+m)
+	Rsyslog is a remote syslog implementation. Syslog is a standard for message logging (the act of keeping a log).
+	
+n)
+	Modificar el fichero interfaces y hacer pruebas con ping6
+	ifdown tun0 && ifup tun0
+
+a)
+	ntpq -c peers -> See current NTP peers
+	ntpq -c sysinfo -> See NTP status
+	Saber que el servicio funciona con comandos.
+	flags como no modify, no serve
+
+b)
+	Configurar rsyslog (tcp o udp, solo logs de autenticación)
+	*.* (All log types)
+	@@ (Over TCP)
+	
+d)
+	Clean cache directories ->
+		/var/cache
+		/home/lsi/.cache
+
+	Clear some logs ->
+		/var/logs
+
+	Uninstall applications and use apt autoremove ->
+		rhythmbox
+		baobab
+		avahi-daemon
+		caribou
+		zenity
+		pulseaudio
+		orca
+		tracker
+		nautilus
+		gnome-music
+		totem
+		simple-scan
+		seahorse
+		shotwell
+		rygel-playbin
+		evolution
+		evince
+		discover
+		geoclue
+
+	To list all mannually isntalled packages ->
+		comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)
+
+	Uninstall the gnome de and install a lightweight one

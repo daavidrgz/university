@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-2019-09/schema#",
+    "$id": "http://ws.udc.es/movies/json",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "movieId": {"type": "integer"},
+            "title": {"type": "string"},
+            "runtime": {"type": "integer"},
+            "releaseDate": { 
+                "type": "object",
+                "properties": {
+                    "day": {"type": "integer"},
+                    "month": {"type": "integer"},
+                    "year": {"type": "integer"},
+                },
+                "additionalProperties": false,
+                "required": ["day", "month", "year"]
+            },
+            "directors": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 1
+            },
+            "actors": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 1
+            },
+            "genres": {
+                "type": "array",
+                "items": { "enum": ["COM", "DRA", "HOR", "ROM", "SFI",
+                             "THR"]},
+                "minItems": 1
+            },
+            "price": {"type": "number"},
+            "description": {"type": "string"}
+        },
+        "additionalProperties": false,
+        "required": ["movieId", "title", "runtime", "releaseDate",  
+            "directors", "actors", "genres", "price", "description"]
+    }
+}

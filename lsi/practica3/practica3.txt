@@ -1,0 +1,23 @@
+1.-
+	- Empezar por el apartado c) utilizando ssh-keygen -> se guarda en el fichero authorized-keys
+	- Si tienes el fingerprintig de la máquina guardando en el known_hosts y para una misma ip el fingerprinting cambia,
+		ssh te avisa ante un posible spoofing.
+
+2.-
+	- Instalar certificado digital (ver tutoriales). Tener cuidado con la información que se le pasa al certificado, no vale darle todo a sí
+	- Enviar el certificado a la Autoridad Certificadora (un compañero), lo firma y se lo devuelve al compañero.
+	- El compañero lo instala en el apache.
+	- Este proceso lo debe hacer a la inversa el otro compa.
+
+3.-
+	- Configurar una VPN. Servidor y cliente.
+
+4.-
+	- Securizar el servicio NTP para que el cliente requiera autenticación.
+
+5.-
+	- El rsyslog debe estar securizado por la VPN.
+
+6.-
+	- Adaptar el statful firewall a todos los servicios del equipo, es decir, añadir reglas iptables que permitan su correcto funcionamiento.
+	(ssh, apache, ntp, rsyslog)

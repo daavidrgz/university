@@ -1,0 +1,88 @@
+# Peso de la implementación de los métodos públicos
+
+## DAO Trip
+
+### AbstractSqlTripDao
+
+- find: David
+- update: Jorge
+- remove: Julian
+- findByCity: David
+
+### Jdbc3CcSqlTripDao
+
+- create: David
+
+## DAO Booking 
+
+### AbstractSqlBookingDao
+
+- find: Jorge
+- update: Julian 
+- remove: David
+- findByEmail: Julian
+
+### Jdbc3CcSqlBookingDao
+
+- create: Jorge
+
+## Servicio
+
+### TripServiceImpl
+
+- addTrip: David
+- updateTrip: Julian
+- findTripByCity: Julian
+- bookTrip: Jorge
+- cancelBooking: David
+- getBookings: Jorge 
+
+## Test de integración
+
+### AppService
+
+- testAddTripAndFindTrip: Jorge
+- testAddInvalidTrip: Jorge
+- testUpdateTrip: David
+- testFindByCity: Julian
+- testBookTrip: Julian
+- testCancelBooking: David
+- testGetBookings: Jorge
+
+## Servlets servicio REST
+
+### TripsServlet
+
+- processPost: Jorge
+- processPut: Julian
+- processGet: Jorge
+
+### BookingsServlet
+- processPost: David
+- processGet: Julian
+
+## Cliente
+
+### RestClientTripService
+
+- addTrip: Jorge
+- updateTrip: David 
+- findTripByCity: Julian
+- bookTrip: David
+- cancelBooking: Julian
+- getBookings:Jorge
+
+## Trabajo tutelado
+
+- Grupo 1: Julian
+- Grupo 2: David
+- Grupo 3: Jorge
+
+### Servicio
+BookingConversor: Julian
+TripConversor: Jorge 
+Servlet: David
+### Cliente
+BookingConversor: Julian
+TripConversor: David
+

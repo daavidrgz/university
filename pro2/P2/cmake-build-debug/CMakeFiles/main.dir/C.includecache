@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/David/Downloads/P2/center_list.h
+types.h
+/cygdrive/c/Users/David/Downloads/P2/types.h
+stdbool.h
+-
+party_list.h
+/cygdrive/c/Users/David/Downloads/P2/party_list.h
+
+/cygdrive/c/Users/David/Downloads/P2/main.c
+stdio.h
+-
+types.h
+/cygdrive/c/Users/David/Downloads/P2/types.h
+center_list.h
+/cygdrive/c/Users/David/Downloads/P2/center_list.h
+stdlib.h
+-
+string.h
+-
+
+/cygdrive/c/Users/David/Downloads/P2/party_list.h
+types.h
+/cygdrive/c/Users/David/Downloads/P2/types.h
+stdbool.h
+-
+stdlib.h
+-
+
+/cygdrive/c/Users/David/Downloads/P2/types.h
+

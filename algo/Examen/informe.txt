@@ -1,0 +1,160 @@
+David Rodríguez Bacelar (david.rbacelar@udc.es)
+
+=============================================
+
+## INTRODUCCIÓN:
+
+
+
+*/*/*/*/ASUMIMOS QUE EL ALGORITMO DE ORDENACIÓN ERA SHELL CON INCREMENTOS DE HIBBARD
+AUNQUE EL PRIMER INCREMENTO SEA 65536 EN LUGAR DE 65535 (debido, seguramente, a un error)*/*/*/*
+
+
+
+## El principal objetivo de este análisis empírico será el de estudiar la complejidad que tiene el algoritmo de ordenación Shell con incrementos de Hibbard 
+(de la forma 2^k - 1 donde k = 1, 2, 3 ... 16); midiendo sus tiempos de ejecución en microsegundos para distinto número de entradas y distintos casos de inicialización del vector.
+
+## Para realizar las pruebas se utilizó un Lenovo-Legion Y540 con las siguientes especificaciones:
+	- Procesador Intel® Core™ i5-9300H @ 2.40GHz × 8.
+	- Memoria RAM DDR4 de 16 GB (2x8 GB) a 2666 MHz.
+	- Sistema Operativo GNU/LINUX Ubuntu v20.04.1 LTS 64bit / Kernel: 5.4.0-52-generic.
+
+
+## En primer lugar y para comprobar el correcto funcionamiento del algoritmo, se implementó una función test:
+
+---> INICIALIZACIÓN DESCENDENTE
+
+(19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+
+- Ordenado: 0
+
+Shell:
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
+
+- Ordenado: 1
+
+
+---> INICIALIZACIÓN ALEATORIA
+
+(16, -1, 1, 11, 8, 8, -5, -13, 8, -16, 2, 17, 20, -7, 6, 2, 4, 14, -17, -7)
+
+- Ordenado: 0
+
+Shell:
+(-17, -16, -13, -7, -7, -5, -1, 1, 2, 2, 4, 6, 8, 8, 8, 11, 14, 16, 17, 20)
+
+- Ordenado: 1
+
+====================
+
+## RESULTADOS:
+
+AVISO: Recalcar que para obtener una tabla con valores más estables, se repitió cada prueba 3 veces, escogiendo finalmente 
+aquella con una variabilidad menor en los tiempos.
+
+
+    · El vector ya está ordenado, es decir, inicializado en orden ascendente; para este caso tenemos:
+    
+            - La cota subestimada f(n) = n^0.9
+            - La cota ajustada g(n) = n^1.05
+            - La cota sobreestimada h(n) = n^1.15
+            
+            
+SHELL CON INICIALIZACIÓN ASCENDENTE:
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+     16000       596.0000       0.098070      0.0229573     0.00871984
+     32000      1319.0000       0.116308      0.0245379     0.00869606
+     64000      2824.0000       0.133445      0.0253732     0.00838992
+    128000      5948.0000       0.150620      0.0258107     0.00796305
+    256000     12470.0000       0.169220      0.0261345     0.00752299
+    512000     25392.0000       0.184652      0.0257018     0.00690298
+   1024000     50924.0000       0.198451      0.0248947     0.00623846
+
+
+Notas:
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.0245, 0.0255).
+
+CONCLUSIÓN: T(n) = O(n^1.05).
+    
+    
+---------------------------------
+    
+    
+    · El vector está inicializado en orden descendente; para este otro caso tenemos:
+        
+            - La cota subestimada f(n) = n
+            - La cota ajustada g(n) = n^1.1
+            - La cota sobreestimada h(n) = n^1.2
+            
+                    
+SHELL CON INICIALIZACIÓN DESCENDENTE:
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+     16000       866.0000       0.054125      0.0205582     0.00780861
+     32000      1800.0000       0.056250      0.0199346     0.00706468
+     64000      3930.0000       0.061406      0.0203046     0.00671393
+    128000      8377.0000       0.065445      0.0201910     0.00622926
+    256000     17718.0000       0.069211      0.0199228     0.00573491
+    512000     39712.0000       0.077563      0.0208317     0.00559497
+   1024000    112174.0000       0.109545      0.0274513     0.00687911 @
+
+     
+Notas:
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C = 0.020.
+    - @: Medición anómala del tiempo de ejecución.
+            
+CONCLUSIÓN: t(n) = O(n^1.1).
+    
+    
+---------------------------------
+    
+    
+    · El vector está inicializado aleatoriamente; para este último caso:
+        
+            - La cota subestimada f(n) = n
+            - La cota ajustada g(n) = n^1.15
+            - La cota sobreestimada h(n) = n^1.3
+
+
+SHELL CON INICIALIZACIÓN ALEATORIA:
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+     16000      2745.0000       0.171563      0.0401610     0.00940127
+     32000      5891.0000       0.184094      0.0388389     0.00819396
+     64000     13158.0000       0.205594      0.0390916     0.00743286
+    128000     29728.0000       0.232250      0.0397992     0.00682013
+    256000     65154.0000       0.254508      0.0393066     0.00607057
+    512000    144133.0000       0.281510      0.0391835     0.00545397
+   1024000    325998.0000       0.318357      0.0399365     0.00500985
+
+
+Notas:
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante ϵ (0.039, 0.040).
+            
+CONCLUSIÓN: t(n) = O(n^1.15).
+
+
+=======================================
+=======================================
+
+
+##CONCLUSIONES FINALES:
+
+Por un lado, como se aprecia en los resultados, vemos como los tiempos de ejecución para la inicialización aleatoria son muy superiores a las otras dos,
+siendo la inicialización ascendente (mejor caso) la que obtiene los mejores tiempos.
+
+Por otro lado, comparando la cota para el caso medio (inicialización aleatoria) obtenida empíricamente O(n^1.15) y la que tenemos como referencia a partir de
+simulaciones O(n^5/4), obtenemos una mejor complejidad. Sin embargo, dado que la inicialización descendente no se corresponde con el peor caso para
+este algoritmo, no podemos realizar dicha comparación.
+
+En definitiva, la utilización de incrementos de Hibbard, en contraposición a los incrementos de Shell originales (basándonos en los resultados obtenidos en
+prácticas anteriores), resulta en una mejora en los tiempos de ejecución, así como en la complejidad de un algoritmo cuya sencillez en la implementación
+acompaña a los buenos resultados que ofrece.
+
+
+
+

@@ -1,0 +1,121 @@
+# 1. Añadir excursión
+## -a <city> <description> <date> <price> <maxPlaces> 
+
+// excId=1 creada
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'A Coruña' 'Ciudad Vieja' '2022-08-15T11:00' 20 10"   
+// excId=2 creada        
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'Santiago' 'Visita Catedral' '2022-09-25T11:00' 25 30"
+// excId=3 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'A Coruña' 'Hércules' '2022-08-20T11:00' 18 20"            
+ // excId=4 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'A Coruña' 'Día de Playas' '2022-10-25T11:00' 40 50"       
+ 
+// Falla (ciudad inválida)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a ' ' 'Casco Histórico' '2022-08-14T11:00' 25 30"
+// Falla (descripción inválida)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'Santiago' ' ' '2022-08-14T11:00' 25 30"        
+// Falla (fecha inválida)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'Santiago' 'Casco Histórico' '2021-08-14T11:00' 25 30"  
+// Falla (precio inválido) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'Santiago' 'Casco Histórico' '2022-08-14T11:00' -2 30"
+// Falla (plazas inválidas)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-a 'Santiago' 'Casco Histórico' '2022-08-14T11:00' 25 0" 
+
+# 2. Reservar una excursión
+## -b <userEmail> <excursionId> <creditCardNumber> <places>
+
+// resId=1 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user1@udc.es' 1 '0123456789111111' 5"
+// resId=2 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user2@udc.es' 1 '0123456789222222' 4"
+// resId=3 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user1@udc.es' 3 '0123456789111111' 2"
+// resId=4 creada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user3@udc.es' 4 '0123456789333333' 3"
+ 
+// Falla (no hay plazas) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user3@udc.es' 1 '0123456789333333' 3"
+ // Falla (excursión no existe)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user4@udc.es' 9 '0123456789444444' 3"
+ 
+ // Falla (plazas inválidas) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user4@udc.es' 2 '0123456789444444' 6" 
+// Falla (tarjeta inválida)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user4@udc.es' 2 '0123456789' 2" 
+
+## Actualizar excursión en la base de datos
+
+UPDATE Trip SET startDate='2021-08-25 11:00' WHERE tripId=4;
+
+## Reservar una excursión pasada
+
+// Falla (fuera de plazo) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-b 'user4@udc.es' 4 '0123456789333333' 2"  
+
+# 3. Actualizar excursión
+## -u <excId> <city> <description> <date> <price> <maxPlaces>
+
+// Modificada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 3 'A Coruña' 'Visita Torre de Hércules' '2022-10-20T11:00' 25 10" 
+ 
+ // Falla (plazas < 9) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 1 'A Coruña' 'Ciudad Vieja' '2022-08-15T11:00' 20 8"
+// Falla (fecha no se puede adelantar) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 1 'A Coruña' 'Ciudad Vieja' '2022-07-30T11:00' 20 10"
+ 
+// Falla (Fuera de plazo) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 4 'A Coruña' 'Día de Playas' '2022-10-25T11:00' 50 80" 
+ 
+ // Falla (excursión no existe) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 9 'Lugo' 'Paseo Murallas' '2022-08-14T11:00' 10 5"
+ 
+ // Falla (ciudad inválida) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 2 ' ' 'Casco Histórico' '2022-08-14T11:00' 25 30"
+// Falla (descripción inválida) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 2 'Santiago' ' ' '2022-08-14T11:00' 25 30"
+// Falla (precio inválido)   
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 2 'Santiago' 'Casco Histórico' '2022-08-14T11:00' -2 30"
+// Falla (plazas inválidas) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-u 2 'Santiago' 'Casco Histórico' '2022-08-14T11:00' 25 0"
+
+# 4. Cancelar una reserva
+## -c <reservationId> <userEmail>  
+
+// resId=3 cancelada 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-c 3 'user1@udc.es'"  
+ 
+ // Falla (ya cancelada) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-c 3 'user1@udc.es'"    
+ 
+ // Falla (fuera de plazo) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-c 4 'user3@udc.es'"    
+ 
+ // Falla (no pertenece al usuario) 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-c 2 'user1@udc.es'"    
+ 
+ // Falla (reserva no existe)
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-c 9 'user2@udc.es'"    
+
+# 5. Buscar excursion
+## -ft <city> <fromDate> <toDate>
+
+// Devuelve excursiones con id 1 y 3     
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-ft 'A Coruña' '2022-08-01' '2022-12-15'"
+// Devuelve excursión con id 1  
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-ft 'A Coruña' '2022-08-01' '2022-09-01'"
+// Devuelve lista vacía 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-ft 'Santiago' '2022-08-01' '2022-09-01'"
+ 
+ // Falla (fecha pasada) o lista vacía 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-ft 'Santiago' '2021-08-01' '2021-09-01'"
+// Falla (ciudad inválida) o lista vacía
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-ft ' ' '2022-08-01' '2022-09-01'"   
+
+# 6. Buscar reservas
+## -fb <userEmail>
+
+// Devuelve reservas con id 1 y 3 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-fb 'user1@udc.es'"
+ 
+ // Devuelve lista vacía 
+mvn exec:java -Dexec.mainClass="es.udc.ws.app.client.ui.AppServiceClient" -Dexec.args="-fb 'user6@udc.es'"

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/David/Downloads/P1/dynamic_list.c
+dynamic_list.h
+/cygdrive/c/Users/David/Downloads/P1/dynamic_list.h
+
+/cygdrive/c/Users/David/Downloads/P1/dynamic_list.h
+types.h
+/cygdrive/c/Users/David/Downloads/P1/types.h
+stdbool.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/cygdrive/c/Users/David/Downloads/P1/types.h
+

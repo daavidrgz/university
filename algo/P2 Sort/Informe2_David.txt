@@ -1,0 +1,276 @@
+David Rodríguez Bacelar (david.rbacelar@udc.es)
+Anxo Portela Iglesias (anxo.portela.iglesias@udc.es) 
+Sergio Rodríguez Seoane: sergio.rodriguez.seoane@udc.es
+
+=============================================
+
+## INTRODUCCIÓN:
+
+## El principal objetivo de este análisis empírico será el de hayar la complejidad que tienen dos algoritmos de ordenación de vectores
+(Ordenación por Inserción y Ordenación Shell con incrementos de Shell) implementados en C, midiendo sus tiempos de ejecución en microsegundos para distinto 
+número de entradas y distintos casos.
+
+## Para realizar las pruebas se utilizó un Lenovo-Legion Y540 con las siguientes especificaciones:
+	- Procesador Intel® Core™ i5-9300H @ 2.40GHz × 8.
+	- Memoria RAM DDR4 de 16 GB (2x8 GB) a 2666 MHz.
+	- Sistema Operativo GNU/LINUX Ubuntu v20.04.1 LTS 64bit / Kernel: 5.4.0-52-generic.
+
+
+## En primer lugar y para comprobar el correcto funcionamiento de ambos algoritmos, se utilizaron dos funciones test que 
+ordenaban vectores con incilizaciones aleatorias y descendentes de tamaño 20.
+
+
+===============TEST INSERCIÓN===============
+
+Inicialización aleatoria:
+(9, -11, -10, -16, -15, -6, -7, -4, 6, -16, 5, -9, -8, 6, 2, -18, -9, 1, 4, -11)
+Ordenado: 0
+
+-------Ordenación por Inserción-------
+(-18, -16, -16, -15, -11, -11, -10, -9, -9, -8, -7, -6, -4, 1, 2, 4, 5, 6, 6, 9)
+Ordenado: 1
+
+Inicialización descendiente:
+(19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+Ordenado: 0
+
+-------Ordenación por Inserción-------
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
+Ordenado: 1
+
+
+===============TEST SHELL=================
+
+Inicialización aleatoria:
+(-8, -8, 20, 6, -12, -6, -5, 14, -3, 19, 11, 20, 10, 15, 0, 1, -1, -15, 19, 3)
+Ordenado: 0
+
+-------Ordenación Shell-------
+(-15, -12, -8, -8, -6, -5, -3, -1, 0, 1, 3, 6, 10, 11, 14, 15, 19, 19, 20, 20)
+Ordenado: 1
+
+Inicialización descendiente:
+(19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+Ordenado: 0
+
+-------Ordenación Shell-------
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
+Ordenado: 1
+
+
+===========================================
+
+
+## RESULTADOS:
+
+AVISO: Recalcar que para obtener una tabla con valores más estables, se repitió cada prueba 3 veces, escogiendo finalmente 
+aquella con una variabilidad menor en los tiempos.
+
+## Para analizar el algoritmo de ordenación por inserción, distinguimos tres posibilidades:
+
+    · El vector ya está ordenado, es decir, inicializado en orden ascendente; para este caso tenemos:
+    
+            - La cota subestimada f(n) = n^0.8
+            - La cota ajustada g(n) = n
+            - La cota sobreestimada h(n) = n^1.1
+            
+            
+ORDENACIÓN POR INSERCIÓN CON INICIALIZACIÓN ASCENDENTE:
+
+
+        n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500         1.4660       0.010162      0.0029320     0.00157495
+*     1000         2.9060       0.011569      0.0029060     0.00145645
+*     2000         5.8100       0.013285      0.0029050     0.00135845
+*     4000        13.7630       0.018074      0.0034407     0.00150123 @
+*     8000        25.9720       0.019590      0.0032465     0.00132162
+*    16000        48.9640       0.021212      0.0030603     0.00116237
+*    32000        96.2110       0.023939      0.0030066     0.00106552
+
+Notas:
+    - *: Tiempo promedio en µs de K1 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.00295, 0.00305).
+    - @: Medición anómala del tiempo de ejecución.
+  
+DISCUSIÓN: A pesar de existir una única medición anómala, el análisis de los tiempos resultaba en unos datos bastante variables.
+CONCLUSIÓN: T(n) = O(n).
+    
+    
+---------------------------------
+    
+    
+    · El vector está inicializado en orden descendente; para este otro caso tenemos:
+        
+            - La cota subestimada f(n) = n^1.8
+            - La cota ajustada g(n) = n^2
+            - La cota sobreestimada h(n) = n^2.1
+            
+                    
+ORDENACIÓN POR INSERCIÓN CON INICIALIZACIÓN DESCENDENTE:
+
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500       291.3310       0.004039      0.0011653     0.00062596
+      1000      1115.0000       0.004439      0.0011150     0.00055882
+      2000      4539.0000       0.005189      0.0011347     0.00053064
+      4000     18176.0000       0.005967      0.0011360     0.00049565
+      8000     72872.0000       0.006871      0.0011386     0.00046352
+     16000    290165.0000       0.007856      0.0011335     0.00043052
+     32000   1178322.0000       0.009162      0.0011507     0.00040780
+     
+Notas:
+    - *: Tiempo promedio en µs de K1 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.00114, 0.00116).
+            
+CONCLUSIÓN: t(n) = O(n^2).
+    
+    
+---------------------------------
+    
+    
+    · El vector está inicializado aleatoriamente; para este último caso:
+        
+            - La cota subestimada f(n) = n^1.8
+            - La cota ajustada g(n) = n^2
+            - La cota sobreestimada h(n) = n^2.1
+
+
+ORDENACIÓN POR INSERCIÓN CON INICIALIZACIÓN ALEATORIA:
+
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500       148.2220       0.002055      0.0005929     0.00031848
+      1000       601.0000       0.002393      0.0006010     0.00030121
+      2000      2308.0000       0.002639      0.0005770     0.00026982
+      4000      9380.0000       0.003080      0.0005862     0.00025579
+      8000     37816.0000       0.003565      0.0005909     0.00024054
+     16000    148429.0000       0.004019      0.0005798     0.00022023
+     32000    596437.0000       0.004638      0.0005825     0.00020642
+
+Notas:
+    - *: Tiempo promedio en µs de K1 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.000585, 0.000591).
+            
+CONCLUSIÓN: t(n) = O(n^2).
+
+
+
+=======================================
+=======================================
+
+
+
+## Para analizar el algoritmo de ordenación shell, distinguimos los mismos casos:
+
+    · El vector ya está ordenado, es decir, inicializado en orden ascendente; para este caso tenemos:
+    
+            - La cota subestimada f(n) = n
+            - La cota ajustada g(n) = n^1.1
+            - La cota sobreestimada h(n) = n^1.3
+            
+            
+ORDENACIÓN SHELL CON INICIALIZACIÓN ASCENDENTE:
+
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500        13.5920       0.027428      0.0107021     0.00421330
+*     1000        31.5370       0.032821      0.0111897     0.00397027
+*     2000        69.7810       0.035361      0.0111571     0.00356778
+*     4000       153.6140       0.038946      0.0110678     0.00318972
+*     8000       357.7190       0.042348      0.0116142     0.00301665
+     16000       777.0000       0.062187      0.0113680     0.00266112
+     32000      1689.0000       0.071031      0.0111354     0.00234928
+
+Notas:
+    - *: Tiempo promedio en µs de K2 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C = 0.011.
+            
+CONCLUSIÓN: t(n) = O(n^1.1).
+
+
+---------------------------------
+    
+    
+    · El vector está inicializado en orden descendente; para este otro caso tenemos:
+        
+            - La cota subestimada f(n) = n
+            - La cota ajustada g(n) = n^1.15
+            - La cota sobreestimada h(n) = n^1.3
+            
+            
+ORDENACIÓN SHELL CON INICIALIZACIÓN DESCENDENTE:
+
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500        18.8230       0.037646      0.0202219     0.00583483
+*     1000        41.9910       0.041991      0.0210454     0.00528635
+*     2000        93.0130       0.046506      0.0217476     0.00475559
+*     4000       204.3950       0.051099      0.0222948     0.00424417
+*     8000       456.5820       0.057073      0.0232338     0.00385036
+     16000      1005.0000       0.062812      0.0238580     0.00344199
+     32000      2122.0000       0.066312      0.0235007     0.00295155
+
+Notas:
+    - *: Tiempo promedio en µs de K2 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C = 0.0235.
+            
+CONCLUSIÓN: t(n) = O(n^1.15).
+        
+
+---------------------------------
+    
+    
+    · El vector está inicializado aleatoriamente; para este último caso:
+        
+            - La cota subestimada f(n) = n
+            - La cota ajustada g(n) = n^1.2
+            - La cota sobreestimada h(n) = n^1.3
+
+            
+ORDENACIÓN SHELL CON INICIALIZACIÓN ALEATORIA:
+
+
+         n           t(n)      t(n)/f(n)      t(n)/g(n)      t(n)/h(n)
+
+*      500        45.1520       0.090304      0.0260563     0.01399639
+*     1000       105.4830       0.105483      0.0264961     0.01327952
+*     2000       242.7430       0.121371      0.0265406     0.01241103
+      4000       543.0000       0.135750      0.0258421     0.01127514
+      8000      1219.0000       0.152375      0.0252520     0.01027985
+     16000      2862.0000       0.178875      0.0258063     0.00980198
+     32000      6336.0000       0.198000      0.0248677     0.00881293
+
+Notas:
+    - *: Tiempo promedio en µs de K2 = 1.000 ejecuciones para tiempos por debajo del umbral de confianza (t = 500 µs).
+    - La relación entre t(n) y g(n) (la cota ajustada) se aproxima a una constante C ϵ (0.0250, 0.0255).
+            
+CONCLUSIÓN: t(n) = O(n^1.2).
+
+
+=======================================
+=======================================
+
+
+##CONCLUSIONES FINALES:
+
+Por un lado, como se aprecia en los resultados, con una inicialización ascendente (mejor caso) se obtiene un vector ya ordenado, 
+por lo que en ambos algoritmos se realizarán menos pasos y se reducirá su complejidad. Cabe señalar que para este caso, la ordenación por 
+Inserción obtiene unos mejores resultados.
+
+Por otro lado, para el algoritmo de Inserción, el peor caso se da con una inicialización del vector descendente, coincidiendo los resultados con 
+su complejidad teórica O(n^2). No siendo así en la ordenación de Shell, en la que el caso medio es incluso peor que la 
+inicialización descendente O(n^1.15), lo que nos imposibilita calcular la complejidad del peor caso en la práctica.
+
+Además, tras realizar el análisis empiríco se aprecia que en el caso medio, el método de ordenación de Shell tiene aproximadamente una complejidad O(n^1.2).
+Consecuencia de esto, la aproximación de las cotas a funciones que se correspondieran con los tiempos medidos, fue algo más
+inexacta, complicando la obtención de unos valores estables en las tablas (tanto para este caso como para el resto de las inicializaciones).
+La ordenación por Inserción, en cambio, mantuvo su complejidad teórica del caso medio ya conocida O(n^2), haciendo mucho más fácil su análisis.
+
+En definitiva, e incluso habiendo utilizado los incrementos de Shell (menos eficientes que otros como los de Hibbard o Sedgewick), en términos de 
+eficiencia, la implementación de Shell supera ampliamente (excepto en el caso de la inicialización ascendente) la de Inserción, sacrificando, eso sí, la extrema 
+facilidad en la implementación de este último.

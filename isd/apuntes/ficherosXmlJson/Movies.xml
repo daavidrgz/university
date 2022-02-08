@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<movies xmlns="http://ws.udc.es/movies/xml">
+
+
+    <!-- Dark Knight Rises Again. -->
+    <movie>
+        <movieId>3</movieId>
+        <title>Dark Knight Rises Again</title>
+        <runtime>165</runtime> 
+        <releaseDate day="20" month="7" year="2012"/>
+        <director>Cristopher Nolan</director>
+        <actor>Christian Bale </actor>
+        <actor>Morgan Freeman</actor>
+        <genre>THR</genre>
+        <price>4.99</price>
+        <description> Ocho años después de los acontecimientos de The Dark Knight, Gotham se encuentra en un estado de paz. En virtud de los poderes otorgados por la Ley Dent, el comisario Gordon casi ha erradicado la violencia y el crimen organizado. Sin embargo, todavía se siente culpable por el encubrimiento de los crímenes de Harvey Dent.</description>
+    </movie>
+
+    <!-- Con la Muerte en los Talones. -->
+    <movie>
+        <movieId>4</movieId>
+        <title>Con la Muerte en los Talones</title>
+        <runtime>136</runtime> 
+        <releaseDate day="26" month="9" year="1959"/>
+        <director>Alfred Hitchcock</director>
+        <actor>Cary Grant</actor>
+        <actor>Eve Marie Saint</actor>
+        <actor>James Manson</actor>
+        <genre>THR</genre>
+        <genre>COM</genre>
+        <price>3.99</price>
+        <description> Roger O. Thornhill (Cary Grant) es un ejecutivo publicitario de Nueva York al que unos espías confunden con un agente del gobierno. Debe escapar, pero lo siguen de cerca. Durante la fuga conoce a una atractiva mujer, Eve Kendall (Eva Marie Saint), que lo ayuda. Algunas de sus escenas son recordadas por la magnitud de las imágenes: la persecución de Thornhill por un campo sembrado por una avioneta que quiere matarlo, una pelea en el Monte Rushmore y la escena filmada de incógnito en la sede de la ONU en Nueva York. </description>
+  </movie>
+</movies>

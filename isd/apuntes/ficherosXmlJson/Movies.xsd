@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://ws.udc.es/movies/xml"
+            xmlns="http://ws.udc.es/movies/xml"
+            elementFormDefault="qualified">
+
+    <!-- "ReleaseDate" type. -->
+    <xsd:complexType name="ReleaseDate">
+        <xsd:attribute name="day" type="xsd:short"/>
+        <xsd:attribute name="month" type="xsd:short"/>
+        <xsd:attribute name="year" type="xsd:short"/>
+    </xsd:complexType>
+
+
+    <!-- "Genre" type.
+    Possible values of genre:
+    * COM: Comedy
+    * DRA: Drama
+    * HOR: Horror
+    * ROM: Romance
+    * SFI: Science fiction
+    * THR: Thriller
+    -->
+    <xsd:simpleType name="Genre">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="COM"/>
+            <xsd:enumeration value="DRA"/>
+            <xsd:enumeration value="HOR"/>
+            <xsd:enumeration value="ROM"/>
+            <xsd:enumeration value="SFI"/>
+            <xsd:enumeration value="THR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
+
+    <!-- "Movie" type. -->
+    <xsd:complexType name="Movie">
+        <xsd:sequence>
+            <xsd:element name="movieId" type="xsd:long"/>
+            <xsd:element name="title" type="xsd:string"/>
+            <xsd:element name="runtime" type="xsd:short"/>
+            <xsd:element name="releaseDate" type="ReleaseDate"/>
+            <xsd:element name="director" type="xsd:string"
+                         minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="actor" type="xsd:string"
+                         minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="genre" type="Genre"
+			        minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="price" type="xsd:float"/>
+            <xsd:element name="description" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <!-- "Movies" type. -->
+    <xsd:complexType name="Movies">
+        <xsd:sequence>
+            <xsd:element name="movie" type="Movie"
+                         maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <!-- "movies" element (root element). -->
+    <xsd:element name="movies" type="Movies"/>
+	
+</xsd:schema>
+

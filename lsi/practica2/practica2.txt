@@ -1,0 +1,27 @@
+a) ettercap (sniffer). Se pueden aplicar filtros para ARP-poisoning, Man in the middle...
+	Cuidado al utilizar las barras! (/)
+	Generar trafico, y capturarlo en un fichero (pcap)
+	Descargar mediante scp fichero ruta el pcap y analizarlo con whireshark en nuestra máquina
+
+e) Obtener las conexiones legítimas en la interfaz ens33 (rsyslog, ntp...)
+
+f) ettercap (arp-suffing) ver en tiempo real la navegación de la vítcima, no solo las peticiones HTTP
+
+g) Generar un payload reverse-shell con Metasploit. Con la ejecución del payload obtener la shell.
+  Utilizar métodos de ingeniería social para lograr que la víctima ejecute el payload.
+	Insertar el payload en imágenes, pdfs...
+
+i) Utilizar "arpon" para evitar arp poisoning y comprobar que la tabla arp no cambia.
+
+j/p) Host discovery port scanning y fingerprinting, del router, servidor dns, la del compañero, pero no todas las de la red.
+Utilizar ipv4 e ipv6
+
+l) Los ataques tipo reflective, utilizan a otras máquinas. Jugar con los servicios que ofrecen broadcast
+
+m/n) Compañero instala apache. Ataque DoS de capa 7 importante ya que la manera de defenderse no es la misma.
+Cargar en apache el modsecurity y configurarlo para el OK.
+
+q/r/s) Ataque de fuerza bruta con "medusa" dos ficheros de diccionario con los users y pass
+La víctima tiene que instalar ossec (no se instala con apt, hay que compilarlo) es un IPS (protección contra intrusiones).
+Ver logs y localizar la detección.
+Devolver la conectividad al que realiza el ataque. No se permite reiniciar el ossec ni hacer modificaciones manuales.
