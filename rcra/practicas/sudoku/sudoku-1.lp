@@ -1,0 +1,9 @@
+cell(3,0,4).cell(5,0,6).cell(6,0,7).cell(7,0,2).
+cell(2,1,4).cell(3,1,2).cell(4,1,7).cell(7,1,8).
+cell(2,2,6).cell(5,2,5).cell(8,2,4).
+cell(1,3,4).cell(5,3,7).cell(8,3,3).
+cell(1,4,8).cell(2,4,5).cell(3,4,9).cell(4,4,3).cell(5,4,4).
+cell(1,5,7).cell(4,5,6).cell(6,5,5).
+cell(3,6,3).cell(4,6,8).cell(5,6,2).cell(8,6,7).
+cell(0,7,8).cell(1,7,3).cell(3,7,6).cell(6,7,9).
+cell(6,8,4).

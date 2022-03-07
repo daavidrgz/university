@@ -28,11 +28,12 @@ agregar 5 conj;;
 
 
 (* ===== CONJUNTO DE LISTA ===== *)
-let conjunto_of_list l = Conjunto l;;
+let conjunto_of_list l = List.fold_left (fun c e -> agregar e c) (Conjunto([])) l;;
 
 conjunto_of_list [1;2;3];;
-(* - : int conjunto = Conjunto [1; 2; 3] *)
-
+(* - : int conjunto = Conjunto [3; 2; 1] *)
+conjunto_of_list [1;2;3;3];;
+(* - : int conjunto = Conjunto [3; 2; 1] *)
 
 (* ===== SUPRIMIR ===== *)
 let suprimir a = function
