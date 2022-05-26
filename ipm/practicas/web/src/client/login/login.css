@@ -5,14 +5,14 @@ body {
 }
 
 main {
-	position: relative;
-	margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
   width: 800px;
   max-width: 80vw;
   height: min-content;
   padding: 5vmin 5vmin;
 
-	background-color: var(--white);
+  background-color: var(--white);
 
   border-radius: 10px;
 }
